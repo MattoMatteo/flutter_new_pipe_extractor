@@ -22,11 +22,11 @@ A new Flutter plugin project.
   s.prepare_command = <<-CMD
     set -e
     ASSETS_DIR="../assets"
-    ZIP_URL="https://github.com/MattoMatteo/NewPipeCLI/releases/download/0.1.3/NewPipeCLI-macos-universal.zip"
+    ZIP_URL="https://github.com/MattoMatteo/NewPipeCLI/releases/download/0.1.4/NewPipeCLI-macos-universal.zip"
     ZIP_PATH="$ASSETS_DIR/NewPipeCLI-macos-universal.zip"
 
     # Expected SHA256 checksum of the release zip
-    EXPECTED_SHA256="4e4563313e48414cbcb05a1bc08df8bcc8250ab61e1114abea90f3a4a14ebbe0"
+    EXPECTED_SHA256="102d3641eca3013bb546b3e9e640651939c0da495f89bdf00e0b534577847722"
 
     mkdir -p "$ASSETS_DIR"
 

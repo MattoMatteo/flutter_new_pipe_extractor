@@ -78,6 +78,10 @@ class NewPipeDesktopApiImpl implements NewPipeExtractor {
       // runInShell: true,
       // NewPipeCLI may create temp files, so we set the working directory to a writable temp dir
       workingDirectory: Directory.systemTemp.path,
+      // NewPipeCLI writes UTF-8; the default (systemEncoding) is a legacy code
+      // page on Windows and garbled non-ASCII names ("RÃœFÃœS DU SOL")
+      stdoutEncoding: utf8,
+      stderrEncoding: utf8,
     );
 
     final stdOut = result.stdout.toString();
@@ -119,8 +123,11 @@ class NewPipeDesktopApiImpl implements NewPipeExtractor {
     String? sortFilter,
   }) async {
     final res = await executeString([
-      "--search",
-      query,
+      // Base64 of the UTF-8 query: on Windows non-ASCII characters in command
+      // line arguments arrived as '?' ("PAVÉ" -> "PAV?") and the search
+      // returned unrelated results. Needs NewPipeCLI >= 0.1.4 (fork).
+      "--search-b64",
+      base64Encode(utf8.encode(query)),
       if (contentFilters != null) ...[
         "--content-filters",
         contentFilters.join(","),
