@@ -33,15 +33,22 @@ abstract class NewPipeExtractor {
       sortFilter: sortFilter,
     );
 
-    return json
-        .map((e) => switch (e.data["infoType"]) {
-              "STREAM" => VideoSearchResultItem.fromJson(deepCastMap(e.data)),
-              "PLAYLIST" =>
-                PlaylistSearchResultItem.fromJson(deepCastMap(e.data)),
-              "CHANNEL" =>
-                ChannelSearchResultItem.fromJson(deepCastMap(e.data)),
-              _ => throw Exception("Unknown type: ${e.data["type"]}"),
-            })
-        .toList();
+    final results = <SearchResultItem>[];
+    for (final e in json) {
+      // Skip items that can't be parsed (YouTube changes, missing fields)
+      // instead of failing the whole search for one of them
+      try {
+        results.add(switch (e.data["infoType"]) {
+          "STREAM" => VideoSearchResultItem.fromJson(deepCastMap(e.data)),
+          "PLAYLIST" => PlaylistSearchResultItem.fromJson(deepCastMap(e.data)),
+          "CHANNEL" => ChannelSearchResultItem.fromJson(deepCastMap(e.data)),
+          _ => throw Exception("Unknown type: ${e.data["infoType"]}"),
+        });
+      } catch (error) {
+        // ignore: avoid_print
+        print("[NewPipeExtractor.search] skipping \"${e.data["name"]}\": $error");
+      }
+    }
+    return results;
   }
 }

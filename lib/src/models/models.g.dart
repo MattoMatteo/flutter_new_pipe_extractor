@@ -109,25 +109,27 @@ VideoSearchResultItem _$VideoSearchResultItemFromJson(
         Map<String, dynamic> json) =>
     VideoSearchResultItem(
       streamType: $enumDecode(_$StreamInfoTypeEnumMap, json['streamType']),
-      uploaderName: json['uploaderName'] as String,
+      uploaderName: json['uploaderName'] as String? ?? '',
       shortDescription: json['shortDescription'] as String?,
       uploadDate: json['uploadDate'] == null
           ? null
           : DateWrapper.fromJson(json['uploadDate'] as Map<String, dynamic>),
-      viewCount: (json['viewCount'] as num).toInt(),
-      duration: (json['duration'] as num).toInt(),
-      uploaderUrl: json['uploaderUrl'] as String,
-      uploaderAvatars: (json['uploaderAvatars'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      uploaderVerified: json['uploaderVerified'] as bool,
-      shortFormContent: json['shortFormContent'] as bool,
+      viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
+      duration: (json['duration'] as num?)?.toInt() ?? 0,
+      uploaderUrl: json['uploaderUrl'] as String? ?? '',
+      uploaderAvatars: (json['uploaderAvatars'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      uploaderVerified: json['uploaderVerified'] as bool? ?? false,
+      shortFormContent: json['shortFormContent'] as bool? ?? false,
       infoType: $enumDecode(_$SearchResultTypeEnumMap, json['infoType']),
       url: json['url'] as String,
       name: json['name'] as String,
-      thumbnails: (json['thumbnails'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      thumbnails: (json['thumbnails'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       textualUploadDate: json['textualUploadDate'] as String?,
     );
 
@@ -176,9 +178,10 @@ ChannelSearchResultItem _$ChannelSearchResultItemFromJson(
       infoType: $enumDecode(_$SearchResultTypeEnumMap, json['infoType']),
       url: json['url'] as String,
       name: json['name'] as String,
-      thumbnails: (json['thumbnails'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      thumbnails: (json['thumbnails'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       description: json['description'] == null
           ? null
           : InfoDescription.fromJson(
@@ -208,9 +211,10 @@ PlaylistSearchResultItem _$PlaylistSearchResultItemFromJson(
       infoType: $enumDecode(_$SearchResultTypeEnumMap, json['infoType']),
       url: json['url'] as String,
       name: json['name'] as String,
-      thumbnails: (json['thumbnails'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      thumbnails: (json['thumbnails'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
       description: json['description'] == null
           ? null
           : InfoDescription.fromJson(

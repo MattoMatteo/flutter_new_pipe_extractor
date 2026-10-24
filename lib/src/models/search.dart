@@ -57,6 +57,7 @@ abstract class SearchResultItem {
   final SearchResultType infoType;
   final String url;
   final String name;
+  @JsonKey(defaultValue: [])
   final List<Thumbnail> thumbnails;
 
   SearchResultItem({
@@ -69,16 +70,26 @@ abstract class SearchResultItem {
 
 @JsonSerializable()
 class VideoSearchResultItem extends SearchResultItem {
+  // YouTube Music song results by artists without a YouTube channel have no
+  // uploaderUrl (e.g. 4 of 20 for "THE END OF US PAVÉ"): default the
+  // descriptive fields so one such item doesn't fail the whole search.
   final StreamInfoType streamType;
+  @JsonKey(defaultValue: '')
   final String uploaderName;
   final String? shortDescription;
   final String? textualUploadDate;
   final DateWrapper? uploadDate;
+  @JsonKey(defaultValue: 0)
   final int viewCount;
+  @JsonKey(defaultValue: 0)
   final int duration;
+  @JsonKey(defaultValue: '')
   final String uploaderUrl;
+  @JsonKey(defaultValue: [])
   final List<Thumbnail> uploaderAvatars;
+  @JsonKey(defaultValue: false)
   final bool uploaderVerified;
+  @JsonKey(defaultValue: false)
   final bool shortFormContent;
 
   VideoSearchResultItem({
