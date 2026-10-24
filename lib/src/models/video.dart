@@ -34,52 +34,81 @@ class Engagement {
 
 @JsonSerializable()
 class VideoInfo extends Info {
+  // YouTube sometimes returns reduced responses (e.g. to non-official clients)
+  // without some descriptive fields: keep them optional / defaulted so parsing
+  // doesn't throw and the streams can still be played.
   final StreamInfoType streamType;
+  @JsonKey(defaultValue: [])
   final List<Thumbnail> thumbnails;
+  @JsonKey(defaultValue: '')
   final String textualUploadDate;
-  final DateWrapper uploadDate;
+  final DateWrapper? uploadDate;
+  @JsonKey(defaultValue: 0)
   final int duration;
+  @JsonKey(defaultValue: 0)
   final int ageLimit;
-  final InfoDescription description;
+  final InfoDescription? description;
 
+  @JsonKey(defaultValue: 0)
   final int viewCount;
+  @JsonKey(defaultValue: 0)
   final int likeCount;
+  @JsonKey(defaultValue: 0)
   final int dislikeCount;
 
+  @JsonKey(defaultValue: '')
   final String uploaderName;
+  @JsonKey(defaultValue: '')
   final String uploaderUrl;
+  @JsonKey(defaultValue: [])
   final List<Thumbnail> uploaderAvatars;
+  @JsonKey(defaultValue: false)
   final bool uploaderVerified;
+  @JsonKey(defaultValue: 0)
   final int uploaderSubscriberCount;
 
+  @JsonKey(defaultValue: '')
   final String subChannelName;
+  @JsonKey(defaultValue: '')
   final String subChannelUrl;
+  @JsonKey(defaultValue: [])
   final List<Thumbnail> subChannelAvatars;
 
+  @JsonKey(defaultValue: [])
   final List<VideoStream> videoStreams;
+  @JsonKey(defaultValue: [])
   final List<AudioStream> audioStreams;
+  @JsonKey(defaultValue: [])
   final List<VideoStream> videoOnlyStreams;
 
+  @JsonKey(defaultValue: '')
   final String dashMpdUrl;
+  @JsonKey(defaultValue: '')
   final String hlsUrl;
 
   // final List<InfoItem> relatedItems;
 
+  @JsonKey(defaultValue: 0)
   final int startPosition;
 
   // final List<SubtitlesStream> subtitles = List.of();
 
   // final String host = "";
   // final StreamExtractor.Privacy privacy;
+  @JsonKey(defaultValue: '')
   final String category;
+  @JsonKey(defaultValue: '')
   final String licence;
+  @JsonKey(defaultValue: '')
   final String supportInfo;
 
   // final Locale language = null;
+  @JsonKey(defaultValue: [])
   final List<String> tags;
 
   // final List<StreamSegment> streamSegments = List.of();
   // final List<MetaInfo> metaInfo = List.of();
+  @JsonKey(defaultValue: false)
   final bool shortFormContent;
 
   VideoInfo({
@@ -90,10 +119,10 @@ class VideoInfo extends Info {
     required this.streamType,
     required this.thumbnails,
     required this.textualUploadDate,
-    required this.uploadDate,
+    this.uploadDate,
     required this.duration,
     required this.ageLimit,
-    required this.description,
+    this.description,
     required this.viewCount,
     required this.likeCount,
     required this.dislikeCount,

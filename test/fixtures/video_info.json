@@ -1,0 +1,105 @@
+{
+  "dislikeCount": -1,
+  "description": {
+    "content": "desc",
+    "type": 1
+  },
+  "likeCount": 1440,
+  "uploaderVerified": true,
+  "dashMpdUrl": "",
+  "subChannelName": "",
+  "startPosition": 0,
+  "duration": 248,
+  "ageLimit": 0,
+  "streamType": "VIDEO_STREAM",
+  "subChannelUrl": "",
+  "host": "",
+  "textualUploadDate": "2025-11-21T07:00:06-08:00",
+  "id": "RgA12gkdIvo",
+  "viewCount": 92091,
+  "hlsUrl": "",
+  "licence": "YouTube licence",
+  "relatedItems": [],
+  "subChannelAvatars": [],
+  "originalUrl": "https://www.youtube.com/watch?v=RgA12gkdIvo",
+  "uploaderUrl": "https://www.youtube.com/channel/UCIq8QZNx4Ge6rbBejiSwQBw",
+  "url": "https://www.youtube.com/watch?v=RgA12gkdIvo",
+  "tags": [
+    "tigercub",
+    "fall in fall out"
+  ],
+  "shortFormContent": false,
+  "uploadDate": {
+    "isApproximation": false,
+    "offsetDateTime": 1763737206
+  },
+  "uploaderAvatars": [
+    {
+      "width": 48,
+      "url": "https://yt3.ggpht.com/wCiHSxAqmKN_t3TSHKpvLtv87t6EtLven4idNNhKvzZQPCkE75iMrPm4a5A_mM7cmeqkr9HZPQ=s48-c-k-c0x00ffffff-no-rj",
+      "height": 48
+    }
+  ],
+  "uploaderName": "TIGERCUB",
+  "videoStreams": [
+    {
+      "itag": 18,
+      "deliveryMethod": "PROGRESSIVE_HTTP",
+      "itagItem": {
+        "audioTrackId": null,
+        "avgBitrate": -1,
+        "audioTrackName": null,
+        "targetDurationSec": -1,
+        "fps": 25,
+        "audioTrackType": null,
+        "initStart": -1,
+        "mediaFormat": "MPEG-4",
+        "bitrate": 688684,
+        "initEnd": -1,
+        "itagType": "VIDEO",
+        "resolutionString": "360p",
+        "approxDurationMs": 248267,
+        "sampleRate": -1,
+        "indexStart": -1,
+        "quality": "medium",
+        "codec": "avc1.42001E, mp4a.40.2",
+        "audioChannels": -1,
+        "width": 640,
+        "contentLength": 21366423,
+        "id": 18,
+        "indexEnd": -1,
+        "height": 360
+      },
+      "fps": 25,
+      "initStart": -1,
+      "mediaFormat": "MPEG-4",
+      "bitrate": 688684,
+      "initEnd": -1,
+      "resolution": "360p",
+      "content": "https://example.invalid/stream",
+      "indexStart": -1,
+      "quality": "medium",
+      "codec": "avc1.42001E, mp4a.40.2",
+      "isVideoOnly": false,
+      "manifestUrl": null,
+      "isUrl": true,
+      "width": 640,
+      "id": "18",
+      "indexEnd": -1,
+      "height": 360
+    }
+  ],
+  "name": "TIGERCUB - FALL IN FALL OUT (Official Video)",
+  "audioStreams": [],
+  "thumbnails": [
+    {
+      "width": 168,
+      "url": "https://i.ytimg.com/vi/RgA12gkdIvo/hqdefault.jpg?sqp=-oaymwEiCKgBEF5IWvKriqkDFQgBFQAAAAAYASUAAMhCPQCAokN4AQ==&rs=AOn4CLD2kTWNoqhoD3GMIJsGAjik0UBCSw",
+      "height": 94
+    }
+  ],
+  "category": "Music",
+  "videoOnlyStreams": [],
+  "uploaderSubscriberCount": 18800,
+  "supportInfo": ""
+}

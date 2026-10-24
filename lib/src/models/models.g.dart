@@ -380,48 +380,60 @@ VideoInfo _$VideoInfoFromJson(Map<String, dynamic> json) => VideoInfo(
       originalUrl: json['originalUrl'] as String,
       name: json['name'] as String,
       streamType: $enumDecode(_$StreamInfoTypeEnumMap, json['streamType']),
-      thumbnails: (json['thumbnails'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      textualUploadDate: json['textualUploadDate'] as String,
-      uploadDate:
-          DateWrapper.fromJson(json['uploadDate'] as Map<String, dynamic>),
-      duration: (json['duration'] as num).toInt(),
-      ageLimit: (json['ageLimit'] as num).toInt(),
-      description:
-          InfoDescription.fromJson(json['description'] as Map<String, dynamic>),
-      viewCount: (json['viewCount'] as num).toInt(),
-      likeCount: (json['likeCount'] as num).toInt(),
-      dislikeCount: (json['dislikeCount'] as num).toInt(),
-      uploaderName: json['uploaderName'] as String,
-      uploaderUrl: json['uploaderUrl'] as String,
-      uploaderAvatars: (json['uploaderAvatars'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      uploaderVerified: json['uploaderVerified'] as bool,
-      uploaderSubscriberCount: (json['uploaderSubscriberCount'] as num).toInt(),
-      subChannelName: json['subChannelName'] as String,
-      subChannelUrl: json['subChannelUrl'] as String,
-      subChannelAvatars: (json['subChannelAvatars'] as List<dynamic>)
-          .map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      videoStreams: (json['videoStreams'] as List<dynamic>)
-          .map((e) => VideoStream.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      audioStreams: (json['audioStreams'] as List<dynamic>)
-          .map((e) => AudioStream.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      videoOnlyStreams: (json['videoOnlyStreams'] as List<dynamic>)
-          .map((e) => VideoStream.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      dashMpdUrl: json['dashMpdUrl'] as String,
-      hlsUrl: json['hlsUrl'] as String,
-      startPosition: (json['startPosition'] as num).toInt(),
-      category: json['category'] as String,
-      licence: json['licence'] as String,
-      supportInfo: json['supportInfo'] as String,
-      tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
-      shortFormContent: json['shortFormContent'] as bool,
+      thumbnails: (json['thumbnails'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      textualUploadDate: json['textualUploadDate'] as String? ?? '',
+      uploadDate: json['uploadDate'] == null
+          ? null
+          : DateWrapper.fromJson(json['uploadDate'] as Map<String, dynamic>),
+      duration: (json['duration'] as num?)?.toInt() ?? 0,
+      ageLimit: (json['ageLimit'] as num?)?.toInt() ?? 0,
+      description: json['description'] == null
+          ? null
+          : InfoDescription.fromJson(
+              json['description'] as Map<String, dynamic>),
+      viewCount: (json['viewCount'] as num?)?.toInt() ?? 0,
+      likeCount: (json['likeCount'] as num?)?.toInt() ?? 0,
+      dislikeCount: (json['dislikeCount'] as num?)?.toInt() ?? 0,
+      uploaderName: json['uploaderName'] as String? ?? '',
+      uploaderUrl: json['uploaderUrl'] as String? ?? '',
+      uploaderAvatars: (json['uploaderAvatars'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      uploaderVerified: json['uploaderVerified'] as bool? ?? false,
+      uploaderSubscriberCount:
+          (json['uploaderSubscriberCount'] as num?)?.toInt() ?? 0,
+      subChannelName: json['subChannelName'] as String? ?? '',
+      subChannelUrl: json['subChannelUrl'] as String? ?? '',
+      subChannelAvatars: (json['subChannelAvatars'] as List<dynamic>?)
+              ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      videoStreams: (json['videoStreams'] as List<dynamic>?)
+              ?.map((e) => VideoStream.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      audioStreams: (json['audioStreams'] as List<dynamic>?)
+              ?.map((e) => AudioStream.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      videoOnlyStreams: (json['videoOnlyStreams'] as List<dynamic>?)
+              ?.map((e) => VideoStream.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      dashMpdUrl: json['dashMpdUrl'] as String? ?? '',
+      hlsUrl: json['hlsUrl'] as String? ?? '',
+      startPosition: (json['startPosition'] as num?)?.toInt() ?? 0,
+      category: json['category'] as String? ?? '',
+      licence: json['licence'] as String? ?? '',
+      supportInfo: json['supportInfo'] as String? ?? '',
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
+      shortFormContent: json['shortFormContent'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$VideoInfoToJson(VideoInfo instance) => <String, dynamic>{
