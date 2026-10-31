@@ -27,11 +27,6 @@ class NewPipeDesktopApiImpl implements NewPipeExtractor {
 
     final destBinary = File(join(appSupportDir.path, binaryName));
 
-    // if (await destBinary.exists()) {
-    //   executableFile = destBinary;
-    //   return;
-    // }
-
     final arch = Platform.isMacOS || Platform.isIOS
         ? ""
         : Platform.version.contains(RegExp("x64|x86_64"))
@@ -41,30 +36,31 @@ class NewPipeDesktopApiImpl implements NewPipeExtractor {
         platformFileNames["${Platform.operatingSystem}$arch"] as String;
     final bytes = await rootBundle
         .load('packages/flutter_new_pipe_extractor/assets/$zipName');
-    final data = bytes.buffer.asUint8List();
 
-    final tempDir = await getTemporaryDirectory();
-    final zipPath = join(tempDir.path, zipName);
-    final file = await File(zipPath).writeAsBytes(data);
+    // Only the zip's index is read here, the binary is inflated on demand
+    final archive = ZipDecoder().decodeBytes(bytes.buffer.asUint8List());
+    final entry = archive.findFile(binaryName);
+    if (entry == null) throw Exception("$binaryName not found in $zipName");
 
-    final archive = ZipDecoder().decodeBytes(await file.readAsBytes());
-    for (final entry in archive) {
-      final outPath = join(tempDir.path, entry.name);
-      if (entry.isFile) {
-        await File(outPath).create(recursive: true);
-        await File(outPath).writeAsBytes(entry.content as List<int>);
-      } else {
-        await Directory(outPath).create(recursive: true);
-      }
+    // Rewriting the binary on every start delays the app's window (28 MB on
+    // Windows, scanned again by the antivirus each time): keep the extracted
+    // copy while it's the bundled one
+    final stamp = File("${destBinary.path}.version");
+    final bundledVersion = "${entry.crc32}:${entry.size}";
+    if (await destBinary.exists() &&
+        await stamp.exists() &&
+        await stamp.readAsString() == bundledVersion) {
+      executableFile = destBinary;
+      return;
     }
 
-    final srcBinary = File(join(tempDir.path, binaryName));
-
-    await srcBinary.copy(destBinary.path);
+    await destBinary.writeAsBytes(entry.content, flush: true);
 
     if (!Platform.isWindows) {
       await Process.run('chmod', ['+x', destBinary.path]);
     }
+
+    await stamp.writeAsString(bundledVersion);
 
     executableFile = destBinary;
   }
